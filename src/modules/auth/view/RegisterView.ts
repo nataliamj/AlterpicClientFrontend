@@ -1,7 +1,7 @@
-// src/modules/auth/view/LoginView.ts
-import { showRegisterView } from '../Auth';
+// src/modules/auth/view/RegisterView.ts
+import { showLoginView } from '../Auth';
 
-export function renderLogin(): HTMLElement {
+export function renderRegister(): HTMLElement {
     const container = document.createElement("div");
     container.innerHTML = `
         <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-cyan-50">
@@ -11,10 +11,19 @@ export function renderLogin(): HTMLElement {
                     <p class="text-gray-600">Transforma tus imágenes de manera creativa</p>
                 </div>
                 
-                <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">Iniciar Sesión</h2>
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">Crear Cuenta</h2>
             
-                
-                <form id="login-form" class="flex flex-col gap-5">
+                <form id="register-form" class="flex flex-col gap-5">
+                    <div>
+                        <input 
+                            id="name"
+                            type="text" 
+                            placeholder="Nombre Completo" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#84bfc3]"
+                            required
+                        />
+                    </div>
+                    
                     <div>
                         <input 
                             id="email"
@@ -35,40 +44,60 @@ export function renderLogin(): HTMLElement {
                         />
                     </div>
                     
+                    <div>
+                        <input 
+                            id="confirm-password"
+                            type="password" 
+                            placeholder="Confirmar Contraseña" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#84bfc3]"
+                            required
+                        />
+                    </div>
+                    
                     <button 
                         type="submit" 
                         class="bg-[#84bfc3] text-white py-3 rounded-lg font-medium mt-4 hover:bg-[#6aa8ac] transition"
                     >
-                        Iniciar Sesión
+                        Crear Cuenta
                     </button>
                 </form>
                 
                 <div class="text-center mt-8">
-                    <p class="text-gray-600">¿No tienes una cuenta? <a href="#" id="register-link" class="text-[#84bfc3] hover:text-[#6aa8ac] font-medium">Regístrate</a></p>
+                    <p class="text-gray-600">¿Ya tienes una cuenta? <a href="#" id="login-link" class="text-[#84bfc3] hover:text-[#6aa8ac] font-medium">Iniciar Sesión</a></p>
                 </div>
             </div>
         </div>
     `;
 
-    const form = container.querySelector<HTMLFormElement>("#login-form")!;
+    const form = container.querySelector<HTMLFormElement>("#register-form")!;
+    const nameInput = form.querySelector<HTMLInputElement>("#name")!;
     const emailInput = form.querySelector<HTMLInputElement>("#email")!;
     const passwordInput = form.querySelector<HTMLInputElement>("#password")!;
-    const registerLink = container.querySelector<HTMLAnchorElement>("#register-link")!;
+    const confirmPasswordInput = form.querySelector<HTMLInputElement>("#confirm-password")!;
+    const loginLink = container.querySelector<HTMLAnchorElement>("#login-link")!;
 
-    registerLink.onclick = (e) => {
+    loginLink.onclick = (e) => {
         e.preventDefault();
-        showRegisterView(); // Usamos la función importada
+        showLoginView(); // Usamos la función importada
     };
 
     form.onsubmit = async (e) => {
         e.preventDefault();
+        const name = nameInput.value;
         const email = emailInput.value;
         const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        // Validaciones básicas
+        if (password !== confirmPassword) {
+            alert("Las contraseñas no coinciden");
+            return;
+        }
 
         try {
-            // await AuthController.login(email, password);
-            console.log("Login exitoso ✅", { email, password });
-            alert("Login exitoso ✅");
+            // Aquí iría la llamada al servicio de registro
+            console.log("Datos de registro:", { name, email, password });
+            alert("Registro exitoso ✅");
         } catch (err) {
             alert("Error ❌: " + (err as Error).message);
         }

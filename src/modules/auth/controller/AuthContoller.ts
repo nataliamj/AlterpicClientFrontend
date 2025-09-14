@@ -26,4 +26,14 @@ export class AuthController {
         }
         return this.user;
     }
+
+    // En src/modules/auth/controller/AuthController.ts
+    static async register(name: string, email: string, password: string) {
+        console.log("➡️ Enviando datos de registro al backend:", { name, email, password });
+        const user = await AuthService.register(name, email, password);
+        this.user = user;
+        localStorage.setItem("user", JSON.stringify(user));
+        console.log("✅ Registro exitoso:", user);
+        return user;
+    }
 }

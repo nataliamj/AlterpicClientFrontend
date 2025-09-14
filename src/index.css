@@ -1,2 +1,88 @@
+/* src/index.css */
 @import "tailwindcss";
 
+    :root {
+    /* Colores principales */
+    --header-bg: #D6EDFF;
+    --menu-bg: #D6EDFF;
+    --main-bg: #F3F8F2;
+    --text-primary: #2a2a2a;
+    --text-secondary: #222222;
+    --text-light: #6b7280;
+    
+    /* Colores de interacción */
+    --menu-hover: #4a5c6c;
+    --menu-active: #3a4856;
+    --dropdown-border: #E5E7EB;
+    --dropdown-hover: #ebf5ff;
+    }
+
+    /* Aplicar variables a los componentes */
+    .header-bg {
+    background-color: var(--header-bg);
+    }
+
+    .menu-bg {
+    background-color: var(--menu-bg);
+    }
+
+    .main-bg {
+    background-color: var(--main-bg);
+    }
+
+    /* Estilos para rotación de flecha */
+    .rotate-180 {
+    transform: rotate(180deg);
+    }
+
+    /* Transición suave para la flecha */
+    #user-menu-arrow {
+    transition: transform 0.2s ease-in-out;
+    }
+
+    /* Asegurar que el contenido principal tenga el espacio correcto */
+    #main-content {
+    margin-left: 16rem;
+    padding-top: 3.5rem;
+    min-height: 100vh;
+    background-color: var(--main-bg);
+    }
+
+    /* Estilos para el menú desplegable */
+    #user-dropdown-menu {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--dropdown-border);
+    }
+
+    /* Estilos para el menú lateral */
+    .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* space-x-3 */
+    padding: 0.5rem; /* p-2 */
+    border-radius: 0.5rem; /* rounded-lg */
+    transition: all 0.2s;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    color: var(--text-primary);
+    }
+
+    .menu-item:hover {
+    background-color: var(--menu-hover);
+    color: white;
+    }
+
+    .menu-item.active {
+    background-color: var(--menu-active);
+    color: white;
+    }
+
+    .menu-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0.5rem 0;
+    }
+
+    /* Mejoras visuales */
+    .hover\:scale-105:hover {
+    transform: scale(1.05);
+    }

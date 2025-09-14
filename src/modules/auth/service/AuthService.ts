@@ -18,4 +18,18 @@ export class AuthService {
         // si el backend maneja logout, llamas al endpoint
         // si no, no haces nada
     }
+
+    // En src/modules/auth/service/AuthService.ts
+    static async register(name: string, email: string, password: string): Promise<User> {
+        const res = await fetch(`${API_URL}/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password })
+        });
+
+        if (!res.ok) throw new Error("Error en registro");
+        return res.json();
+    }
+
+    
 }
