@@ -2,15 +2,11 @@
 import { showLoginView, showRegisterView } from "./modules/auth/Auth";
 import { updateHeader } from "./modules/header/Header";
 
-
-
 export class Router {
     private static currentRoute: string = '/';
     private static basePath = import.meta.env.VITE_BASE_URL || '';
     private static apiUrl = import.meta.env.VITE_API_URL || 'https://your-mockapi-endpoint.com';
     
-    
-
     static init() {
         console.log('Base path:', this.basePath);
         console.log('API URL:', this.apiUrl);
@@ -20,10 +16,11 @@ export class Router {
 
         // Manejar los eventos de navegación del navegador
         window.addEventListener('popstate', () => {
+            console.log('Popstate event detected - handling back/forward navigation');
             this.route();
         });
 
-        // Delegación de eventos para navegación
+        // Delegación de eventos para navegación de enlaces con data-route
         document.addEventListener('click', (e) => {
             const target = e.target as HTMLElement;
             const link = target.closest('a[data-route]');
@@ -34,6 +31,43 @@ export class Router {
                 this.navigateTo(route);
             }
         });
+
+        // MANEJO ESPECÍFICO PARA LOS BOTONES DEL HEADER (LOGIN/REGISTER)
+        this.setupHeaderButtonListeners();
+    }
+
+    // Nuevo método para manejar los botones del header
+    private static setupHeaderButtonListeners() {
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            
+            // Detectar clic en botón de login del dropdown
+            if (target.id === 'login-btn' || target.closest('#login-btn')) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Login button clicked from header');
+                this.navigateTo('/login');
+                return;
+            }
+            
+            // Detectar clic en botón de registro del dropdown
+            if (target.id === 'register-btn' || target.closest('#register-btn')) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Register button clicked from header');
+                this.navigateTo('/register');
+                return;
+            }
+            
+            // Detectar clic en botón de logout del dropdown
+            if (target.id === 'logout-btn' || target.closest('#logout-btn')) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Logout button clicked from header');
+                // Aquí puedes agregar la lógica de logout si es necesario
+                return;
+            }
+        });
     }
 
     static route() {
@@ -41,8 +75,6 @@ export class Router {
         this.currentRoute = path;
         console.log('Navegando a:', path);
 
-
-        
         // Actualizar el header
         updateHeader();
 
@@ -79,12 +111,9 @@ export class Router {
                 this.showModulePlaceholder('history');
                 break;
             case `${this.basePath}/tutorial`: 
-            case '/tutorial': // ← Y ESTA
+            case '/tutorial':
                 this.showModulePlaceholder('tutorial');
                 break;
-        
-
-
             default:
                 // Si tiene base path y no coincide con ninguna ruta, redirigir al home
                 if (this.basePath && path.startsWith(this.basePath)) {
@@ -130,8 +159,8 @@ export class Router {
                 'dashboard': 'Dashboard',
                 'transform': 'Transformar Imágenes',
                 'history': 'Historial de Actividad',
-                'help': 'Ayuda / Soporte',
-                'account': 'Cuenta'
+                'tutorial': 'Tutorial',
+                
             };
             
             const formattedName = moduleNames[moduleName] || moduleName;

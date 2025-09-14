@@ -6,8 +6,11 @@ export function renderLogin(): HTMLElement {
     container.innerHTML = `
         <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-cyan-50">
             <div class="bg-white rounded-2xl shadow-xl p-10 w-full max-w-md mx-4">
-                <div class="text-center mb-8">
-                    <h1 class="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent mb-2">Alterpic</h1>
+                <div class="flex items-center">
+                    <img src="/assets/images/Logito.png" alt="Alterpic Logo" class="h-19">
+                </div>
+                <div class="text-center mb-6">
+                
                     <p class="text-gray-600">Transforma tus imágenes de manera creativa</p>
                 </div>
                 
