@@ -1,88 +1,118 @@
 /* src/index.css */
 @import "tailwindcss";
 
-    :root {
+:root {
     /* Colores principales */
     --header-bg: #D6EDFF;
-    --menu-bg: #b6d8db;
+    --menu-bg: #eefbff;
     --main-bg: #ffffff;
     --text-primary: #2a2a2a;
     --text-secondary: #222222;
     --text-light: #6b7280;
     
     /* Colores de interacción */
-    --menu-hover: #4a5c6c;
-    --menu-active: #3a4856;
+    --menu-hover: #85bec3;
+    --menu-active: #6aa9ad;
     --dropdown-border: #E5E7EB;
     --dropdown-hover: #ebf5ff;
-    }
+}
 
-    /* Aplicar variables a los componentes */
-    .header-bg {
+/* Aplicar variables a los componentes */
+.header-bg {
     background-color: var(--header-bg);
-    }
+}
 
-    .menu-bg {
+.menu-bg {
     background-color: var(--menu-bg);
-    }
+}
 
-    .main-bg {
+.main-bg {
     background-color: var(--main-bg);
-    }
+}
 
-    /* Estilos para rotación de flecha */
-    .rotate-180 {
+/* Estilos para rotación de flecha */
+.rotate-180 {
     transform: rotate(180deg);
-    }
+}
 
-    /* Transición suave para la flecha */
-    #user-menu-arrow {
+/* Transición suave para la flecha */
+#user-menu-arrow {
     transition: transform 0.2s ease-in-out;
-    }
+}
 
-    /* Asegurar que el contenido principal tenga el espacio correcto */
-    #main-content {
+/* Asegurar que el contenido principal tenga el espacio correcto */
+#main-content {
     margin-left: 16rem;
     padding-top: 3.5rem;
     min-height: 100vh;
     background-color: var(--main-bg);
-    }
+}
 
-    /* Estilos para el menú desplegable */
-    #user-dropdown-menu {
+/* Estilos para el menú desplegable */
+#user-dropdown-menu {
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--dropdown-border);
-    }
+}
 
-    /* Estilos para el menú lateral */
-    .menu-item {
+/* CONTENEDOR DEL MENÚ - SIN PADDING */
+.menu-container {
+    width: 16rem; /* 64px */
+    min-height: 100vh;
+    background-color: var(--menu-bg);
+    position: fixed;
+    left: 0;
+    z-index: 10;
+    padding-top: 4rem; /* pt-16 */
+    /* Eliminamos el padding lateral para que los items lleguen al borde */
+}
+
+/* ESTILOS MODIFICADOS PARA EL MENÚ LATERAL - RECTANGULAR COMPLETO */
+.menu-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem; /* space-x-3 */
-    padding: 0.5rem; /* p-2 */
-    border-radius: 0.5rem; /* rounded-lg */
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem; /* Padding consistente */
     transition: all 0.2s;
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 500; /* font-medium */
+    font-size: 0.875rem;
+    font-weight: 500;
     color: var(--text-primary);
-    }
+    border-radius: 0;
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    box-sizing: border-box; /* Incluye padding en el width */
+}
 
-    .menu-item:hover {
+.menu-item:hover {
     background-color: var(--menu-hover);
     color: white;
-    }
+}
 
-    .menu-item.active {
+.menu-item.active {
     background-color: var(--menu-active);
     color: white;
-    }
+}
 
-    .menu-divider {
+/* Asegurar que los iconos se vean blancos en hover/active */
+.menu-item:hover img,
+.menu-item.active img {
+    filter: brightness(0) invert(1);
+}
+
+.menu-divider {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 0.5rem 0;
-    }
+    margin: 0.5rem 1.5rem; /* Margen lateral igual al padding de los items */
+}
 
-    /* Mejoras visuales */
-    .hover\:scale-105:hover {
+/* Mejoras visuales */
+.hover\:scale-105:hover {
     transform: scale(1.05);
-    }
+}
+
+/* Títulos de sección con padding consistente */
+.menu-section-title {
+    padding: 0.4rem 1.5rem 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: var(--text-secondary);
+}

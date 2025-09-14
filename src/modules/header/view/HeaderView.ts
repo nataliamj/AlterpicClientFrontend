@@ -1,13 +1,13 @@
 // src/modules/header/view/HeaderView.ts
 export function renderHeader(isAuthenticated: boolean = false): HTMLElement {
     const headerContainer = document.createElement("div");
-    headerContainer.className = "w-full bg-[#6B8BA4] text-gray-800 p-3 fixed top-0 left-0 z-20 flex justify-between items-center h-14 shadow-md";
+    headerContainer.className = "w-full bg-[#eefbff] text-gray-800 p-3 fixed top-0 left-0 z-20 flex justify-between items-center h-12 shadow-sm";
     
     headerContainer.innerHTML = `
         <!-- Logo a la izquierda -->
-        <div class="flex items-center">
-            <img src="/assets/images/Logito.png" alt="Alterpic Logo" class="h-15">
-        </div>
+        <a href="#" data-route="/dashboard" class="cursor-pointer">
+                <img src="/assets/images/Logito.png" alt="Alterpic Logo" class="h-14 mx-auto">
+        </a>
         
         <!-- Menú de usuario a la derecha -->
         <div class="relative">
